@@ -1,0 +1,538 @@
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #f9fafb;
+}
+
+/* Fondo general con imagen */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #020617 url("img/fondo-navidad.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+/* VISTAS */
+
+.view {
+  position: relative;
+  flex: 1;
+  display: none;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px;
+}
+
+.view-active {
+  display: flex;
+}
+
+/* Contenedor principal */
+
+.container {
+  max-width: 1000px;
+  width: 100%;
+  background: rgba(15, 23, 42, 0.92);
+  border-radius: 24px;
+  padding: 24px 24px 20px;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: "❄️ ❄️ ❄️";
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  opacity: 0.15;
+  font-size: 1.3rem;
+}
+
+/* Cabecera calendario */
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.calendar-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+h1 {
+  font-size: 2.1rem;
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #e5e7eb;
+  margin: 10px 0 12px;
+}
+
+.info {
+  font-size: 0.85rem;
+  color: #cbd5f5;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.legend {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  text-align:center;
+  margin-bottom: 14px;
+}
+
+/* Botones en cabecera */
+
+.header-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.9);
+  background: rgba(15, 23, 42, 0.95);
+  color: #e5e7eb;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-top: 14px;
+}
+
+.header-btn:hover {
+  background: rgba(30, 64, 175, 0.85);
+}
+
+.dev-btn.dev-on {
+  background: linear-gradient(145deg, #22c55e, #bbf7d0);
+  color: #022c22;
+  border-color: #22c55e;
+}
+
+/* GRID de días */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(80px, 1fr));
+  gap: 12px;
+}
+
+/* Tarjetas de día */
+
+.day-card {
+  position: relative;
+  aspect-ratio: 3 / 3;
+  border-radius: 18px;
+  background-image: linear-gradient(
+    145deg,
+    rgba(140, 195, 255, 0.80),
+    rgba(100, 150, 220, 0.80)
+  );
+  background-size: cover;
+  background-position: center;
+  border: 2px solid #0f766e;
+  color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.4);
+}
+
+/* Imágenes de los 24 días (con opacidad algo menor para ver bien el número) */
+
+.day-card[data-day="1"]  { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia01.png"); }
+.day-card[data-day="2"]  { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia02.png"); }
+.day-card[data-day="3"]  { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia03.png"); }
+.day-card[data-day="4"]  { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia04.png"); }
+.day-card[data-day="5"]  { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia05.png"); }
+.day-card[data-day="6"]  { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia06.png"); }
+.day-card[data-day="7"]  { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia07.png"); }
+.day-card[data-day="8"]  { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia08.png"); }
+.day-card[data-day="9"]  { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia09.jpg"); }
+.day-card[data-day="10"] { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia10.png"); }
+.day-card[data-day="11"] { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia11.png"); }
+.day-card[data-day="12"] { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia12.png"); }
+.day-card[data-day="13"] { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia13.png"); }
+.day-card[data-day="14"] { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia14.png"); }
+.day-card[data-day="15"] { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia15.png"); }
+.day-card[data-day="16"] { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia16.png"); }
+.day-card[data-day="17"] { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia17.png"); }
+.day-card[data-day="18"] { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia18.png"); }
+.day-card[data-day="19"] { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia19.png"); }
+.day-card[data-day="20"] { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia20.png"); }
+.day-card[data-day="21"] { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia21.png"); }
+.day-card[data-day="22"] { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia22.png"); }
+.day-card[data-day="23"] { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia23.png"); }
+.day-card[data-day="24"] { background-image: linear-gradient(145deg, rgba(6,78,59,.45), rgba(22,163,74,.45)), url("img/dia24.png"); }
+
+.day-card:hover:not(.locked) {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 26px rgba(0, 0, 0, 0.6);
+}
+
+.day-card.locked {
+  border-color: #374151;
+  color: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+  filter: grayscale(0.2) brightness(0.7);
+}
+
+.day-card.solved {
+  border-color: #22c55e;
+  box-shadow: 0 0 18px rgba(34,197,94,0.6);
+}
+
+.day-card.today {
+  border-color: #facc15;
+  box-shadow: 0 0 20px rgba(250,250,252,0.7);
+}
+
+.day-card.opened:not(.solved):not(.today) {
+  border-color: #facc15;
+}
+
+.day-label {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.icon {
+  font-size: 1.4rem;
+  margin-top: 4px;
+}
+
+/* Vista día */
+
+.container-day {
+  max-width: 780px;
+}
+
+.day-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.back-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(148,163,184,0.9);
+  background: rgba(15,23,42,0.95);
+  color: #e5e7eb;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  background: rgba(30, 64, 175, 0.85);
+}
+
+/* Pistas */
+
+.clue-box {
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(15,23,42,0.95);
+  border: 1px solid rgba(148,163,184,0.7);
+}
+
+.clue-title {
+  font-size: 0.95rem;
+  color: #a5b4fc;
+  margin: 0 0 8px;
+}
+
+.clue-list {
+  padding-left: 18px;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.clue-list li {
+  margin-bottom: 4px;
+}
+
+/* Adivinar */
+
+.guess-box {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(15,23,42,0.95);
+  border: 1px solid rgba(55,65,81,0.9);
+}
+
+.guess-title {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+}
+
+.guess-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.guess-form input {
+  flex: 1;
+  border-radius: 999px;
+  border: 1px solid rgba(148,163,184,0.9);
+  background: rgba(15,23,42,0.9);
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  color: #f9fafb;
+}
+
+.guess-form button {
+  border-radius: 999px;
+  border: none;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  background: linear-gradient(145deg,#f97316,#facc15);
+  color: #111827;
+  font-weight: 600;
+}
+
+.guess-info {
+  min-height: 1.2em;
+  font-size: 0.8rem;
+  color: #d1d5db;
+}
+
+.guess-info.success { color: #4ade80; }
+.guess-info.fail    { color: #fb7185; }
+.guess-info.final   { color: #fbbf24; }
+
+.small {
+  font-size: 0.75rem;
+  text-align: center;
+  color: #9ca3af;
+}
+
+/* Vista final día 24 */
+
+.view-final .container-final {
+  max-width: 1100px;
+  background: rgba(15,23,42,0.96);
+}
+
+.final-layout {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.final-inner {
+  flex: 2;
+  text-align: center;
+}
+
+.final-inner h2 {
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+
+.final-text {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Tarjeta lateral con fotos/vídeos */
+.final-media-card {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 260px;
+}
+
+/* MARCO DE FOTOS/VÍDEOS */
+.final-media-frame {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* Proporción 16:9 */
+  overflow: hidden;
+
+  /* Imagen del marco */
+  background: url("img/marco-final.jpg") no-repeat center center;
+  background-size: cover;
+
+  border-radius: 22px;
+  box-shadow: 0 18px 35px rgba(0,0,0,0.75);
+}
+
+/* Elementos dentro del marco */
+.final-media {
+  position: absolute;
+  inset: 8px;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+
+  border-radius: 16px;
+  object-fit: cover;
+  display: block;
+
+  opacity: 0;
+  transition: opacity 0.8s ease; /* Difuminado suave */
+  background: #020617;
+}
+
+.final-media-active {
+  opacity: 1;
+}
+
+
+/* Vídeo de nieve de fondo */
+
+.snow-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  opacity: 0.25;
+  transition: opacity 0.6s ease;
+  z-index: 10;
+  mix-blend-mode: screen;
+}
+
+/* Modales */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+
+.modal-backdrop.hidden {
+  display: none;
+}
+
+.modal {
+  background: rgba(15,23,42,0.98);
+  border-radius: 20px;
+  padding: 20px 24px;
+  border: 1px solid rgba(248,250,252,0.6);
+  max-width: 380px;
+  width: 92%;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+}
+
+.modal h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.modal-text {
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+}
+
+.modal-btn {
+  border-radius: 999px;
+  border: none;
+  padding: 8px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(145deg,#f97316,#facc15);
+  color: #111827;
+}
+
+.modal-btn.secondary {
+  background: rgba(15,23,42,0.95);
+  color: #e5e7eb;
+  border: 1px solid rgba(148,163,184,0.8);
+}
+
+.modal-input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 12px 0 18px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(148,163,184,0.9);
+  background: #020617;
+  color: #f9fafb;
+  font-size: 0.9rem;
+}
+
+.modal-input::placeholder {
+  color: #6b7280;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* Toast superior */
+
+.top-toast {
+  position: fixed;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #b91c1c;
+  color: #f9fafb;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  z-index: 30;
+  opacity: 0;
+  transition: top 0.4s ease, opacity 0.4s ease;
+}
+
+.top-toast.show {
+  top: 16px;
+  opacity: 1;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .final-layout {
+    flex-direction: column;
+  }
+  .final-media-card {
+    order: -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .view { padding: 16px; }
+  .container { padding: 18px 16px 16px; }
+  .grid { grid-template-columns: repeat(3, minmax(80px, 1fr)); }
+  h1 { font-size: 1.7rem; }
+}
