@@ -13,18 +13,8 @@
 
     <link rel="stylesheet" href="calendario.css" />
 
-    <!-- OneSignal Web Push (rellena TU APP ID después) -->
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
-    <script>
-      window.OneSignal = window.OneSignal || [];
-      OneSignal.push(function() {
-        OneSignal.init({
-          appId: "TU-APP-ID-DE-ONESIGNAL",     // ⬅️ cambia esto en OneSignal
-          safari_web_id: "TU-SAFARI-WEB-ID",   // ⬅️ opcional para Safari, si te lo da
-          notifyButton: { enable: false }
-        });
-      });
-    </script>
+    <!-- ✅ OneSignal V16 (SOLO ESTE) -->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 </head>
 <body>
 <div class="app">
@@ -35,13 +25,25 @@
             <div class="calendar-header">
                 <h1>Calendario de Adviento 🎄</h1>
                 <div class="calendar-header-right">
-                    <!-- Botón para activar recordatorio diario -->
-                    <button class="header-btn" id="notifyBtn">Activar recordatorio diario</button>
 
-                    <!-- Botón modo desarrollador (ya lo tenías) -->
-                    <button class="header-btn dev-btn" id="devBtn">Modo desarrollador</button>
+                    <!-- 🔔 Campanita de notificaciones -->
+                    <button class="notify-btn" id="notifyBtn" aria-label="Activar notificaciones">
+                        <span class="notify-icon">🔔</span>
+                        <span class="notify-text">Recordatorio diario</span>
+                        <span class="notify-pulse" aria-hidden="true"></span>
+                    </button>
+
+                    <!-- Botón modo desarrollador -->
+                    <button class="dev-btn" id="devBtn">Modo desarrollador</button>
                 </div>
             </div>
+
+            <!-- 📌 Mensaje especial iPhone -->
+            <p class="iphone-hint hidden" id="iphoneHint">
+                📌 En iPhone, para recibir notificaciones tienes que añadir esta web a la pantalla de inicio:
+                <br>
+                Compartir → <b>Añadir a pantalla de inicio</b>.
+            </p>
 
             <p class="subtitle">
                 Solo se revela el regalo del día que toques. Luego podrás volver atrás para ver el calendario completo.
