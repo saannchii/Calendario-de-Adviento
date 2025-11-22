@@ -1,15 +1,13 @@
 // Instalación del Service Worker
 self.addEventListener("install", (event) => {
-  // Activación inmediata
   self.skipWaiting();
 });
 
-// Activación
 self.addEventListener("activate", (event) => {
   event.waitUntil(self.clients.claim());
 });
 
-// Manejo de notificaciones push (usadas por OneSignal)
+// Manejo de notificaciones push
 self.addEventListener("push", (event) => {
   let data = {};
   try {
@@ -21,26 +19,24 @@ self.addEventListener("push", (event) => {
   const title = data.title || "Calendario de Adviento 🎄";
   const options = {
     body: data.body || "Ya está disponible el regalo de hoy 💝",
-    icon: data.icon || "img/icon-192.png",
-    badge: data.badge || "img/icon-192.png",
+    icon: data.icon || "img/icon-256.png",
+    badge: data.badge || "img/icon-256.png",
     data: {
-      url: data.url || "/calendario.html"
+      // 👇 Ruta correcta dentro del repo
+      url: data.url || "./index.html"
     }
   };
 
-  event.waitUntil(
-    self.registration.showNotification(title, options)
-  );
+  event.waitUntil(self.registration.showNotification(title, options));
 });
 
-// Al pulsar sobre la notificación, abrir la web
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
-  const url = event.notification.data && event.notification.data.url
-    ? event.notification.data.url
-    : "/calendario.html";
 
-  event.waitUntil(
-    clients.openWindow(url)
-  );
+  const url =
+    (event.notification.data && event.notification.data.url)
+      ? event.notification.data.url
+      : "./index.html";
+
+  event.waitUntil(clients.openWindow(url));
 });
