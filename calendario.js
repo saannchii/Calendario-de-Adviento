@@ -841,32 +841,106 @@ if ("serviceWorker" in navigator) {
 }
 
 // =====================================================
-//  Botón "Activar recordatorio diario"
-//  - Pide permiso de notificación
-//  - Si usas OneSignal, con que el permiso esté concedido
-//    ya podrás programar las notis desde su panel.
+//  NOTIFICACIONES MEJORADAS + OneSignal
+//  ✅ Campanita animada
+//  ✅ Recuerda si ya activó
+//  ✅ Detecta iPhone y avisa
+//  ✅ OneSignal para diarias automáticas
 // =====================================================
-const notifyBtn = document.getElementById("notifyBtn");
 
+const notifyBtn = document.getElementById("notifyBtn");
+const iphoneHint = document.getElementById("iphoneHint");
+
+const NOTIFY_STORAGE_KEY = "adviento_notify_enabled";
+
+// --- Detectar iPhone / iPad ---
+function isIOS() {
+  return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+// Detectar si está instalada como app (PWA)
+function isStandalonePWA() {
+  return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone;
+}
+
+// Mostrar mensajito si es iPhone y no está instalada
+function showIphoneHintIfNeeded() {
+  if (!iphoneHint) return;
+  if (isIOS() && !isStandalonePWA()) {
+    iphoneHint.classList.remove("hidden");
+  } else {
+    iphoneHint.classList.add("hidden");
+  }
+}
+
+// --- Pintar estado del botón según localStorage ---
+function syncNotifyButtonUI() {
+  if (!notifyBtn) return;
+  const enabled = localStorage.getItem(NOTIFY_STORAGE_KEY) === "true";
+  notifyBtn.classList.toggle("enabled", enabled);
+  notifyBtn.querySelector(".notify-text").textContent =
+    enabled ? "Notificaciones activadas" : "Recordatorio diario";
+}
+
+showIphoneHintIfNeeded();
+syncNotifyButtonUI();
+
+// --- OneSignal init ---
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+OneSignalDeferred.push(async function (OneSignal) {
+  await OneSignal.init({
+    appId: "TU_ONESIGNAL_APP_ID_AQUI",  // 👈 PON TU APP ID
+    notifyButton: { enable: false }     // usamos nuestro botón
+  });
+
+  // Si ya estaba suscrito antes, reflejar en UI
+  const isSubscribed = await OneSignal.User.PushSubscription.optedIn;
+  if (isSubscribed) {
+    localStorage.setItem(NOTIFY_STORAGE_KEY, "true");
+    syncNotifyButtonUI();
+  }
+});
+
+
+// --- Evento del botón campanita ---
 if (notifyBtn && "Notification" in window) {
   notifyBtn.addEventListener("click", async () => {
     try {
+      // Pedir permiso nativo
       const perm = await Notification.requestPermission();
+
       if (perm === "granted") {
+        // Marcar como activado en localStorage
+        localStorage.setItem(NOTIFY_STORAGE_KEY, "true");
+        syncNotifyButtonUI();
+
+        // Pedir suscripción OneSignal
+        OneSignalDeferred.push(async function (OneSignal) {
+          await OneSignal.User.PushSubscription.optIn();
+
+          // Tag para luego mandar notis diarias SOLO a quien activó
+          await OneSignal.User.addTag("adviento_notis", "true");
+
+          // Notificación de bienvenida (push real)
+          // Esto NO se puede “forzar” desde JS sin servidor.
+          // Lo haremos desde el panel (te explico abajo).
+        });
+
         alert("¡Perfecto! Te avisaré cada día cuando toque abrir el regalo. 💌");
-        // Si quieres, aquí puedes llamar a OneSignal.push(function(){ ... }) para etiquetar al usuario.
+
       } else if (perm === "denied") {
-        alert("Has rechazado las notificaciones. Si cambias de idea, puedes activarlas en Ajustes de tu iPhone.");
+        localStorage.setItem(NOTIFY_STORAGE_KEY, "false");
+        syncNotifyButtonUI();
+        alert("Has rechazado las notificaciones. Si cambias de idea, puedes activarlas en Ajustes.");
       } else {
-        // 'default' (cerró el cuadro sin elegir)
-        alert("No se han activado las notificaciones. Puedes volver a intentarlo cuando quieras.");
+        alert("No se han activado las notificaciones. Puedes intentarlo cuando quieras.");
       }
     } catch (err) {
       console.error("Error pidiendo permiso de notificación:", err);
     }
   });
 } else if (notifyBtn) {
-  // Si el navegador no soporta notificaciones, ocultamos el botón
   notifyBtn.style.display = "none";
 }
+
 

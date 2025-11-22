@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Calendario de Adviento 🎁</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Manifest PWA -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Iconos (útiles para iOS y PWA) -->
+    <link rel="apple-touch-icon" href="img/icon-192.png">
+
+    <link rel="stylesheet" href="calendario.css" />
+
+    <!-- ✅ OneSignal V16 (SOLO ESTE) -->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+</head>
+<body>
+<div class="app">
+
+    <!-- VISTA CALENDARIO -->
+    <section class="view view-calendar view-active" id="viewCalendar">
+        <div class="container">
+            <div class="calendar-header">
+                <h1>Calendario de Adviento 🎄</h1>
+                <div class="calendar-header-right">
+
+                    <!-- 🔔 Campanita de notificaciones -->
+                    <button class="notify-btn" id="notifyBtn" aria-label="Activar notificaciones">
+                        <span class="notify-icon">🔔</span>
+                        <span class="notify-text">Recordatorio diario</span>
+                        <span class="notify-pulse" aria-hidden="true"></span>
+                    </button>
+
+                    <!-- Botón modo desarrollador -->
+                    <button class="dev-btn" id="devBtn">Modo desarrollador</button>
+                </div>
+            </div>
+
+            <!-- 📌 Mensaje especial iPhone -->
+            <p class="iphone-hint hidden" id="iphoneHint">
+                📌 En iPhone, para recibir notificaciones tienes que añadir esta web a la pantalla de inicio:
+                <br>
+                Compartir → <b>Añadir a pantalla de inicio</b>.
+            </p>
+
+            <p class="subtitle">
+                Solo se revela el regalo del día que toques. Luego podrás volver atrás para ver el calendario completo.
+            </p>
+
+            <p class="info" id="dateInfo"></p>
+            <p class="legend">🎉 = acertado · 👀 = abierto · 🔒 = bloqueado</p>
+
+            <div class="grid" id="daysGrid"></div>
+        </div>
+    </section>
+
+    <!-- VISTA DETALLE DEL DÍA -->
+    <section class="view view-day" id="viewDay">
+        <div class="container container-day">
+            <header class="day-header">
+                <button class="back-btn" id="backBtn">⬅ Volver al calendario</button>
+                <div class="day-header-title">
+                    <h2 id="dayTitle">Día X</h2>
+                    <p class="day-subtitle" id="dayStatus"></p>
+                </div>
+            </header>
+
+            <div class="clue-box">
+                <h3 class="clue-title">Pistas del regalo</h3>
+                <ul class="clue-list" id="clueList"></ul>
+            </div>
+
+            <div class="guess-box">
+                <p class="guess-title" id="guessTitle">
+                    Tienes 3 intentos para adivinar qué hay dentro.
+                </p>
+
+                <form class="guess-form" id="guessForm">
+                    <input
+                            type="text"
+                            id="guessInput"
+                            placeholder="Escribe aquí tu apuesta..."
+                            autocomplete="off"
+                    />
+                    <button type="submit" id="guessButton">Enviar intento</button>
+                </form>
+
+                <div class="guess-info" id="guessInfo"></div>
+                <p class="small">
+                    Cada fallo revela una pista adicional, un poquito más clara… pero sin decirlo todo.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- VISTA FINAL DÍA 24 -->
+    <section class="view view-final" id="viewFinal">
+        <div class="container container-final">
+            <div class="final-layout">
+                <!-- Texto -->
+                <div class="final-inner">
+                    <h2>Has llegado al final del calendario, mi amor ❤️</h2>
+                    <p class="final-text">
+                        Ya hemos llegado al final del calendario mi amor. Quiero que sepas que todo esto me hace una ilusión increíble,
+                        me hace muchísima ilusión todo lo que estamos construyendo y todo lo que te implique a ti en mi vida.
+                        <br><br>
+                        Me haces la persona más feliz del mundo y de verdad te lo digo, el conocerte, ha sido lo mejor que me ha podido pasar.
+                        Ojalá poder seguir toda la vida haciendo este tipo de cosas contigo, me siento tan feliz y afortunado que es algo que ni puedo explicar.
+                        <br><br>
+                        Mil gracias por ser como eres conmigo, mil gracias por todo lo que haces por mí y en general, mil gracias por estar en mi vida.
+                        <br><br>
+                        Feliz Navidad mi vida, por nuestra primera Navidad como novios y por todas las que quedan.
+                        <br><br>
+                        Te amo con todo mi ser Victoria 🐧💚
+                    </p>
+                    <button class="modal-btn" id="finalBackBtn">Volver al calendario</button>
+                </div>
+
+                <!-- Cuadro con secuencia de fotos y vídeos -->
+                <aside class="final-media-card">
+                    <div class="final-media-frame">
+                        <img
+                                id="finalImage"
+                                class="final-media final-media-active"
+                                src="img/final1.jpeg"
+                                alt="Recuerdo especial"
+                        />
+                        <video
+                                id="finalVideo"
+                                class="final-media"
+                                muted
+                                playsinline
+                        ></video>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- VÍDEO DE NIEVE DE FONDO (siempre activo) -->
+    <video id="snowVideo" class="snow-video" muted autoplay loop playsinline>
+        <source src="video/nieve.mp4" type="video/mp4" />
+    </video>
+
+    <!-- MODAL FINAL CUANDO FALLA LOS 3 INTENTOS (días 1–23) -->
+    <div class="modal-backdrop hidden" id="endModalBackdrop">
+        <div class="modal">
+            <h3>Hasta aquí has llegado 🎁</h3>
+            <p class="modal-text">
+                Creo que ni te haces una idea de lo que es…<br/>
+                Mejor abre el regalo y espero de verdad que te encante. 💖
+            </p>
+            <button class="modal-btn" id="endModalCloseBtn">Volver al calendario</button>
+        </div>
+    </div>
+
+    <!-- MODAL DE ACIERTO (días 1–23) -->
+    <div class="modal-backdrop hidden" id="successModalBackdrop">
+        <div class="modal">
+            <h3>¡Has dado en el clavo! 🎉</h3>
+            <p class="modal-text">
+                Diría que te haces bastante idea de lo que es…<br/>
+                Ahora solo queda esperar al momento perfecto para abrirlo. ✨
+            </p>
+            <button class="modal-btn" id="successModalCloseBtn">Volver al calendario</button>
+        </div>
+    </div>
+
+    <!-- MODAL DE MODO DESARROLLADOR -->
+    <div class="modal-backdrop hidden" id="devModalBackdrop">
+        <div class="modal">
+            <h3>Modo desarrollador</h3>
+            <p class="modal-text">
+                Introduce la contraseña para desbloquear todos los días y poder probar el calendario.
+            </p>
+            <input
+                    type="password"
+                    id="devPasswordInput"
+                    class="modal-input"
+                    placeholder="Contraseña"
+            />
+            <div class="modal-actions">
+                <button class="modal-btn secondary" id="devCancelBtn">Cancelar</button>
+                <button class="modal-btn" id="devConfirmBtn">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AVISO SUPERIOR (toast) -->
+    <div class="top-toast" id="topToast">
+        Contraseña de desarrollador incorrecta
+    </div>
+
+</div>
+
+<!-- MÚSICA DE FONDO (loop + crossfade en JS) -->
+<audio id="bgMusic" preload="auto">
+    <source src="audio/musica.mp3" type="audio/mpeg" />
+</audio>
+
+<script src="calendario.js"></script>
+</body>
+</html>
