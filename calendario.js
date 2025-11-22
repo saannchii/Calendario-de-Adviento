@@ -835,7 +835,7 @@ showView("calendar");
 //  PWA: registro de Service Worker
 // =====================================================
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js").catch((err) => {
+  navigator.serviceWorker.register("./sw.js").catch((err) => {
     console.error("Error registrando Service Worker:", err);
   });
 }
