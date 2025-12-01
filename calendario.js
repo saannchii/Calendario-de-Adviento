@@ -10,145 +10,145 @@ const TRANSITION_SNOW_OPACITY = 0.8;
 
 // ===== PISTAS =====
 const HINTS = [
-  // 1) Perilla de palanca de cambios
+  // 1) Perilla de palanca de cambios  (antes ya era el 1)
   [
     "Donde una decisión pequeña cambia por completo el camino que tomas.",
     "Se usa siempre con la mano, pero nunca camina contigo.",
     "Sin tocarlo, el viaje se queda en punto muerto."
   ],
-  // 2) Cabezal de cargador
-  [
-    "No tiene energía propia, pero la presta a otros.",
-    "Le gusta vivir pegado a la pared.",
-    "Sin él, muchos aparatos se quedarían dormidos para siempre."
-  ],
-  // 3) Peine plegable
-  [
-    "Cambia de forma cuando lo necesitas.",
-    "Domina el caos sin levantar la voz.",
-    "Suele aparecer justo antes de un espejo."
-  ],
-  // 4) Marcapáginas
-  [
-    "Siempre vuelve al mismo lugar sin avanzar ni retroceder.",
-    "No lee, pero nunca olvida por dónde ibas.",
-    "Vive entre páginas y odia que las doblen."
-  ],
-  // 5) Juego de brochas (MODIFICADAS)
-  [
-    "No pinta paredes ni lienzos, pero deja huella.",
-    "Viajan juntas como un pequeño ejército silencioso.",
-    "Entienden de colores, pero no pertenecen a un estuche de lápices."
-  ],
-  // 6) Caja de almacenamiento de joyas
-  [
-    "No brilla por sí misma, pero protege lo que sí lo hace.",
-    "Es el hogar de cosas que solo se usan en momentos especiales.",
-    "Si suena un tintineo al moverla, es buena señal."
-  ],
-  // 7) Lego muñeco de nieve
-  [
-    "Nació del frío, pero este nunca se derrite.",
-    "No teme al sol, porque está hecho de algo muy distinto.",
-    "Se construye pieza a pieza, no con copos."
-  ],
-  // 8) Luz de Luna
-  [
-    "Hace de noche incluso cuando es de día.",
-    "No depende del cielo para brillar.",
-    "Trae un trocito de satélite a tu habitación."
-  ],
-  // 9) Flor rosa eterna
-  [
-    "Desafía al calendario y a las estaciones.",
-    "Tiene forma de algo que normalmente acaba marchitándose.",
-    "Fue hecha para quedarse mucho más tiempo de lo normal."
-  ],
-  // 10) Led de notas
-  [
-    "Le gusta iluminar ideas antes de que se escapen.",
-    "Su sitio favorito está cerca de una pared o escritorio.",
-    "Combina mensajes cortos con un pequeño escenario de luz."
-  ],
-  // 11) Lámpara de noche de pato
-  [
-    "Su pico no hace ruido, pero ilumina.",
-    "Es un animal que nunca se mueve del mismo sitio.",
-    "Puede acompañar la noche desde la mesilla sin decir ni pío."
-  ],
-  // 12) Luz de Hello Kitty Luna
-  [
-    "No maúlla, pero le encanta la oscuridad para destacar.",
-    "Tiene la cara de alguien muy famoso en el mundo kawaii.",
-    "La reconocerías por su lazo aunque no vieras nada más."
-  ],
-  // 13) Guirnalda Led para fotos
-  [
-    "Le encantan los recuerdos, pero no tiene memoria propia.",
-    "Solo sirve cuando algo se cuelga de ella.",
-    "Hace que las paredes parezcan una línea del tiempo iluminada."
-  ],
-  // 14) Peluche Burbuja Supernenas
-  [
-    "Es blandito, pero nació de un dibujo muy explosivo.",
-    "Tiene ojos grandes y mucha energía, aunque no se mueva.",
-    "Su origen está en un trío de heroínas bastante retro."
-  ],
-  // 15) Labubu Stitch
-  [
-    "Parece un pequeño caos con cara adorable.",
-    "Es de esas criaturas que dan más ternura que miedo.",
-    "Su diseño mezcla monería con un toque travieso."
-  ],
-  // 16) Peluche Hello Kitty
-  [
-    "No necesita boca para ser reconocida.",
-    "Siempre va bien vestida, aunque esté sobre la cama.",
-    "La ves y piensas en la marca que lo invade todo."
-  ],
-  // 17) Cesta almacenamiento Hello Kitty
-  [
-    "Le encanta el orden, pero por fuera es puro diseño.",
-    "No se pone nerviosa cuando las cosas se acumulan dentro.",
-    "Organiza tus cosas con la misma cara famosa de siempre."
-  ],
-  // 18) Impresora portátil + papel térmico
-  [
-    "No necesita tinta para dejar huella.",
-    "Convierte momentos digitales en pequeños trozos de papel.",
-    "Saca recuerdos en blanco y negro casi al instante."
-  ],
-  // 19) Espejo interior de coche (OJO: ahora va antes)
-  [
-    "Su trabajo es mirar hacia atrás mientras tú miras hacia delante.",
-    "Su hogar siempre está unido a un cristal.",
-    "Te deja ver lo que viene, pero también lo que ya pasó."
-  ],
-  // 20) Espejo de tocador de escritorio
-  [
-    "Solo funciona si alguien está delante.",
-    "Nunca se cansa de ver la misma cara cada día.",
-    "Le gusta vivir cerca de luces y de productos para arreglarse."
-  ],
-  // 21) Cámara de fotos retro
-  [
-    "Detiene el tiempo en rectángulos pequeños.",
-    "Ama los destellos y los clics.",
-    "Tiene un aire antiguo aunque siga funcionando ahora."
-  ],
-  // 22) Mesita para cama
+  // 2) Mesita para cama  (ANTES era el 22)
   [
     "Le encanta acercarse a ti cuando no quieres levantarte.",
     "Sostiene desayunos, libros o portátiles sin quejarse.",
     "Es como una pequeña extensión de la cama cuando estás comodx."
   ],
-  // 23) Proyector portátil
+  // 3) Cabezal de cargador  (ANTES 2)
+  [
+    "No tiene energía propia, pero la presta a otros.",
+    "Le gusta vivir pegado a la pared.",
+    "Sin él, muchos aparatos se quedarían dormidos para siempre."
+  ],
+  // 4) Peine plegable  (ANTES 3)
+  [
+    "Cambia de forma cuando lo necesitas.",
+    "Domina el caos sin levantar la voz.",
+    "Suele aparecer justo antes de un espejo."
+  ],
+  // 5) Marcapáginas  (ANTES 4)
+  [
+    "Siempre vuelve al mismo lugar sin avanzar ni retroceder.",
+    "No lee, pero nunca olvida por dónde ibas.",
+    "Vive entre páginas y odia que las doblen."
+  ],
+  // 6) Juego de brochas  (ANTES 5)
+  [
+    "No pinta paredes ni lienzos, pero deja huella.",
+    "Viajan juntas como un pequeño ejército silencioso.",
+    "Entienden de colores, pero no pertenecen a un estuche de lápices."
+  ],
+  // 7) Caja de almacenamiento de joyas  (ANTES 6)
+  [
+    "No brilla por sí misma, pero protege lo que sí lo hace.",
+    "Es el hogar de cosas que solo se usan en momentos especiales.",
+    "Si suena un tintineo al moverla, es buena señal."
+  ],
+  // 8) Lego muñeco de nieve  (ANTES 7)
+  [
+    "Nació del frío, pero este nunca se derrite.",
+    "No teme al sol, porque está hecho de algo muy distinto.",
+    "Se construye pieza a pieza, no con copos."
+  ],
+  // 9) Luz de Luna  (ANTES 8)
+  [
+    "Hace de noche incluso cuando es de día.",
+    "No depende del cielo para brillar.",
+    "Trae un trocito de satélite a tu habitación."
+  ],
+  // 10) Lámpara de noche de pato  (ANTES 11)
+  [
+    "Su pico no hace ruido, pero ilumina.",
+    "Es un animal que nunca se mueve del mismo sitio.",
+    "Puede acompañar la noche desde la mesilla sin decir ni pío."
+  ],
+  // 11) Flor rosa eterna  (ANTES 9)
+  [
+    "Desafía al calendario y a las estaciones.",
+    "Tiene forma de algo que normalmente acaba marchitándose.",
+    "Fue hecha para quedarse mucho más tiempo de lo normal."
+  ],
+  // 12) Led de notas  (ANTES 10)
+  [
+    "Le gusta iluminar ideas antes de que se escapen.",
+    "Su sitio favorito está cerca de una pared o escritorio.",
+    "Combina mensajes cortos con un pequeño escenario de luz."
+  ],
+  // 13) Luz de Hello Kitty Luna  (ANTES 12)
+  [
+    "No maúlla, pero le encanta la oscuridad para destacar.",
+    "Tiene la cara de alguien muy famoso en el mundo kawaii.",
+    "La reconocerías por su lazo aunque no vieras nada más."
+  ],
+  // 14) Guirnalda Led para fotos  (ANTES 13)
+  [
+    "Le encantan los recuerdos, pero no tiene memoria propia.",
+    "Solo sirve cuando algo se cuelga de ella.",
+    "Hace que las paredes parezcan una línea del tiempo iluminada."
+  ],
+  // 15) Labubu Stitch  (ANTES 15)
+  [
+    "Parece un pequeño caos con cara adorable.",
+    "Es de esas criaturas que dan más ternura que miedo.",
+    "Su diseño mezcla monería con un toque travieso."
+  ],
+  // 16) Peluche Hello Kitty  (ANTES 16)
+  [
+    "No necesita boca para ser reconocida.",
+    "Siempre va bien vestida, aunque esté sobre la cama.",
+    "La ves y piensas en la marca que lo invade todo."
+  ],
+  // 17) Cesta almacenamiento Hello Kitty  (ANTES 17)
+  [
+    "Le encanta el orden, pero por fuera es puro diseño.",
+    "No se pone nerviosa cuando las cosas se acumulan dentro.",
+    "Organiza tus cosas con la misma cara famosa de siempre."
+  ],
+  // 18) Impresora portátil + papel térmico  (ANTES 18)
+  [
+    "No necesita tinta para dejar huella.",
+    "Convierte momentos digitales en pequeños trozos de papel.",
+    "Saca recuerdos en blanco y negro casi al instante."
+  ],
+  // 19) Espejo interior de coche  (ANTES 19)
+  [
+    "Su trabajo es mirar hacia atrás mientras tú miras hacia delante.",
+    "Su hogar siempre está unido a un cristal.",
+    "Te deja ver lo que viene, pero también lo que ya pasó."
+  ],
+  // 20) Espejo de tocador de escritorio  (ANTES 20)
+  [
+    "Solo funciona si alguien está delante.",
+    "Nunca se cansa de ver la misma cara cada día.",
+    "Le gusta vivir cerca de luces y de productos para arreglarse."
+  ],
+  // 21) Cámara de fotos retro  (ANTES 21)
+  [
+    "Detiene el tiempo en rectángulos pequeños.",
+    "Ama los destellos y los clics.",
+    "Tiene un aire antiguo aunque siga funcionando ahora."
+  ],
+  // 22) Peluche Burbuja Supernenas  (ANTES 14)
+  [
+    "Es blandito, pero nació de un dibujo muy explosivo.",
+    "Tiene ojos grandes y mucha energía, aunque no se mueva.",
+    "Su origen está en un trío de heroínas bastante retro."
+  ],
+  // 23) Proyector portátil  (ANTES 23)
   [
     "Convierte paredes normales en escenas enormes.",
     "Cuanto más oscuro esté todo, mejor trabaja.",
     "Le gusta transformar una habitación en mini cine improvisado."
   ],
-  // 24) Hand Casting Kit
+  // 24) Hand Casting Kit  (ANTES 24)
   [
     "No guarda objetos, guarda gestos.",
     "Trabaja con mezcla y paciencia.",
@@ -158,53 +158,76 @@ const HINTS = [
 
 
 const SOLUTIONS = [
-  // 1
+  // 1) Perilla palanca cambios  (igual que antes)
   ["palanca", "cambio", "cambios", "marchas", "coche", "perilla"],
-  // 2
-  ["cargador", "carga", "enchufe", "adaptador"],
-  // 3
-  ["peine", "pelo", "cabello", "plegable", "peinar"],
-  // 4
-  ["marcapaginas", "marcapáginas", "libro", "pagina", "página"],
-  // 5 brochas
-  ["brochas", "brocha", "pincel", "pinceles", "maquillaje"],
-  // 6 joyero
-  ["joyas", "joyero", "anillos", "collar", "pendientes"],
-  // 7 lego nieve
-  ["lego", "bloques", "nieve", "muñeco"],
-  // 8 luz luna
-  ["luna", "lampara", "lámpara", "noche", "luz"],
-  // 9 rosa eterna
-  ["rosa", "flor", "eterna", "preservada"],
-  // 10 led notas
-  ["notas", "postit", "post-it", "apuntes", "led"],
-  // 11 pato
-  ["pato", "lampara", "lámpara", "noche", "luz"],
-  // 12 hello kitty luna
-  ["hello", "kitty", "luna", "gata", "lampara", "lámpara"],
-  // 13 guirnalda fotos
-  ["fotos", "guirnalda", "luces", "recuerdos", "cadena"],
-  // 14 burbuja
-  ["peluche", "burbuja", "supernenas", "muñeca"],
-  // 15 labubu stitch
-  ["labubu", "stitch", "peluche", "muñeco"],
-  // 16 peluche hello kitty
-  ["hello", "kitty", "peluche", "gato"],
-  // 17 cesta hello kitty
-  ["cesta", "caja", "hello", "kitty", "almacenamiento", "organizador"],
-  // 18 impresora
-  ["impresora", "portatil", "portátil", "fotos", "papel", "termico", "térmico", "imprimir"],
-  // 19 espejo coche
-  ["espejo", "coche", "retrovisor", "interior"],
-  // 20 espejo tocador
-  ["espejo", "tocador", "maquillaje"],
-  // 21 camara retro
-  ["camara", "cámara", "fotos", "retro", "polaroid"],
-  // 22 mesita cama
+
+  // 2) Mesita para cama  (ANTES 22)
   ["mesita", "cama", "bandeja", "desayuno"],
-  // 23 proyector
+
+  // 3) Cabezal de cargador  (ANTES 2)
+  ["cargador", "carga", "enchufe", "adaptador"],
+
+  // 4) Peine plegable  (ANTES 3)
+  ["peine", "pelo", "cabello", "plegable", "peinar"],
+
+  // 5) Marcapáginas  (ANTES 4)
+  ["marcapaginas", "marcapáginas", "libro", "pagina", "página"],
+
+  // 6) Juego de brochas  (ANTES 5)
+  ["brochas", "brocha", "pincel", "pinceles", "maquillaje"],
+
+  // 7) Caja joyas  (ANTES 6)
+  ["joyas", "joyero", "anillos", "collar", "pendientes"],
+
+  // 8) Lego muñeco de nieve  (ANTES 7)
+  ["lego", "bloques", "nieve", "muñeco"],
+
+  // 9) Luz de Luna  (ANTES 8)
+  ["luna", "lampara", "lámpara", "noche", "luz"],
+
+  // 10) Lámpara pato  (ANTES 11)
+  ["pato", "lampara", "lámpara", "noche", "luz"],
+
+  // 11) Flor rosa eterna  (ANTES 9)
+  ["rosa", "flor", "eterna", "preservada"],
+
+  // 12) Led de notas  (ANTES 10)
+  ["notas", "postit", "post-it", "apuntes", "led"],
+
+  // 13) Luz Hello Kitty Luna  (ANTES 12)
+  ["hello", "kitty", "luna", "gata", "lampara", "lámpara"],
+
+  // 14) Guirnalda Led fotos  (ANTES 13)
+  ["fotos", "guirnalda", "luces", "recuerdos", "cadena"],
+
+  // 15) Labubu Stitch  (ANTES 15)
+  ["labubu", "stitch", "peluche", "muñeco"],
+
+  // 16) Peluche Hello Kitty  (ANTES 16)
+  ["hello", "kitty", "peluche", "gato"],
+
+  // 17) Cesta almacenamiento Hello Kitty  (ANTES 17)
+  ["cesta", "caja", "hello", "kitty", "almacenamiento", "organizador"],
+
+  // 18) Impresora portátil + papel térmico  (ANTES 18)
+  ["impresora", "portatil", "portátil", "fotos", "papel", "termico", "térmico", "imprimir"],
+
+  // 19) Espejo interior coche  (ANTES 19)
+  ["espejo", "coche", "retrovisor", "interior"],
+
+  // 20) Espejo tocador escritorio  (ANTES 20)
+  ["espejo", "tocador", "maquillaje"],
+
+  // 21) Cámara de fotos retro  (ANTES 21)
+  ["camara", "cámara", "fotos", "retro", "polaroid"],
+
+  // 22) Peluche Burbuja Supernenas  (ANTES 14)
+  ["peluche", "burbuja", "supernenas", "muñeca"],
+
+  // 23) Proyector portátil  (ANTES 23)
   ["proyector", "peliculas", "películas", "cine", "pantalla"],
-  // 24 hand casting
+
+  // 24) Hand Casting Kit  (ANTES 24)
   ["manos", "molde", "yeso", "escultura", "kit", "hand casting"]
 ];
 
@@ -942,5 +965,6 @@ if (notifyBtn && "Notification" in window) {
 } else if (notifyBtn) {
   notifyBtn.style.display = "none";
 }
+
 
 
